@@ -1,0 +1,30 @@
+﻿@model ViewModels.Viewmodels.PuestoViewModel
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<h1>Editar Puesto</h1>
+<form asp-controller="Puesto" asp-action="Editar" method="post">
+    <div class="form-group">
+        <label asp-for="NombrePuesto">Puesto</label>
+        <input asp-for="IdPuesto" hidden />
+        <input asp-for="NombrePuesto" type="text" class="form-control" id="NombrePuesto">
+
+    </div>
+    <div class="form-group">
+        <label asp-for="DescripcionPuesto">Descripcion</label>
+        <input asp-for="DescripcionPuesto" type="text" class="form-control" id="DescripcionPuesto">
+    </div>
+    <div class="form-group">
+        <label asp-for="Estado" class="col-form-label">Estado</label>
+        <select class="custom-select" asp-for="Estado">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

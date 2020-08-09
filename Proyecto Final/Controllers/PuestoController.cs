@@ -56,25 +56,28 @@ namespace Proyecto_Final.Controllers
         }
 
         // GET: Puesto/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Editar(int id)
         {
-            return View();
+            return View( _puestoRepository.Edit(id));
         }
 
         // POST: Puesto/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Editar(PuestoViewModel viewModel)
         {
             try
             {
-                
+                if(await _puestoRepository.Editar(viewModel))
+                {
+                    return RedirectToAction(nameof(IndexPuesto));
+                }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexPuesto));
             }
             catch
             {
-                return View();
+                return View(viewModel);
             }
         }
 
@@ -84,22 +87,6 @@ namespace Proyecto_Final.Controllers
             await _puestoRepository.Delete(id);
             return RedirectToAction(nameof(IndexPuesto));
         }
-
-        // POST: Puesto/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Database.Models;
+using DTOS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,23 +16,34 @@ namespace Proyecto_Final.Infrastructure.AutoMapper
             ConfigurePartido();
             ConfigureCiudadano();
             ConfigureCandidato();
+            ConfigurePuesto();
         }
             
        
         private void ConfigurePartido()
         {
-            CreateMap<PartidoViewModel,Partidos>().ReverseMap().ForMember(dest => dest.fotoPartido, opt => opt.Ignore()); ;
+            CreateMap<PartidoViewModel,PartidoDTO>().ReverseMap().ForMember(dest => dest.fotoPartido, opt => opt.Ignore()); ;
+            CreateMap<PartidoDTO, Partidos>().ReverseMap();
+            
         }
 
         private void ConfigureCiudadano()
         {
-            CreateMap<CiudadanoViewModel, Ciudadanos>().ReverseMap();
+            CreateMap<CiudadanoViewModel, CiudadanoDTO>().ReverseMap();
+            CreateMap<CiudadanoDTO, Ciudadanos>().ReverseMap();
             CreateMap<Ciudadanos, CiudadanoViewModel>().ReverseMap();
         }
 
         private void ConfigureCandidato()
         {
-            CreateMap<CadidatoViewModel, Cadidato>().ReverseMap().ForMember(dest => dest.fotoCandidato, opt => opt.Ignore()); ;
+            CreateMap<CadidatoViewModel, CandidatoDTO>().ReverseMap().ForMember(dest => dest.fotoCandidato, opt => opt.Ignore()); ;
+            CreateMap<CandidatoDTO, Cadidato>().ReverseMap();
+        }
+
+        private void ConfigurePuesto()
+        {
+            CreateMap<PuestoViewModel, PuestoElectivoDTO>().ReverseMap();
+            CreateMap<PuestoElectivoDTO, PuestoElectivo>().ReverseMap();
         }
     }
 }

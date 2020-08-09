@@ -9,27 +9,39 @@
 }
 
 <h1>Partidos</h1>
-@foreach (var item in Model)
-{
-<div class="card" style="width: 18rem;">
-
-    @{ var photoPath = "~/images/partido/" + (!string.IsNullOrEmpty(item.LogoPartido) ? item.LogoPartido : "");}
-    @if (!string.IsNullOrEmpty(item.LogoPartido))
+<div class="card-deck">
+    @foreach (var item in Model)
     {
-        <img src="@photoPath" asp-append-version="true" class="card-img-top" alt="...">
-    }
-    <ul class="card-body">
-        <li>@item.Id</li>
-        <li>@item.NombrePartido</li>
-        <li>@item.DescripcionPartido</li>
-        <li>@item.Estado</li>
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
 
-    </ul>
-    <div class="card-footer">
+            @{ var photoPath = "~/images/partido/" + (!string.IsNullOrEmpty(item.LogoPartido) ? item.LogoPartido : "");}
+            @if (!string.IsNullOrEmpty(item.LogoPartido))
+            {
+                <img src="@photoPath" asp-append-version="true" class="card-img-top" alt="...">
+            }
+            <ul style="list-style:none" class="card-body">
 
-        <a asp-area="" asp-controller="Partido" asp-action="Editar" class="btn btn-warning">editar</a>
-        <a asp-area="" asp-controller="Partido" asp-route-id="@item.Id" asp-action="Delete" class="btn btn-danger">eliminar</a>
+                <li><h4>Nombre: @item.NombrePartido</h4> </li>
+                <li> <h5>Descripcion: @item.DescripcionPartido</h5></li>
+                @if (item.Estado == true)
+                {
+                    <li class="text-success">Activo</li>
+                }
+                else
+                {
+                    <li class="text-danger">Inactivo</li>
+                }
 
+
+            </ul>
+            <div class="card-footer">
+
+                <a asp-area="" asp-controller="Partido"  asp-route-id="@item.Id" asp-action="Editar" class="btn btn-warning">Editar</a>
+                <a asp-area="" asp-controller="Partido" asp-route-foto="@item.LogoPartido" asp-route-id="@item.Id" asp-action="Delete" class="btn btn-danger">Eliminar</a>
+
+            </div>
+        </div>
     </div>
+    }
 </div>
-}

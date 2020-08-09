@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ViewModels.Viewmodels.EleccionesViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<section class="container my-3">
+    <h1>Elecciones</h1>
+    <div class="text-right">
+        <a class="btn btn-outline-success" asp-action="Create">Nueva Eleccion</a>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Opcion</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.IdElecciones</td>
+                        <td>@item.NombreEleciones</td>
+                        <td>@item.Fecha</td>
+                        @if (item.Estado == true)
+                        {
+                            <td class="text-success">Activo</td>
+                        }
+                        else
+                        {
+                            <td class="text-danger">Inactivo</td>
+                        }
+
+
+                        <td>
+                            <a asp-area="" asp-controller="Elecciones" asp-action="Editar" asp-route-id="@item.IdElecciones" class="btn btn-warning">editar</a>
+                            <a asp-area="" asp-controller="Elecciones" asp-route-cedula="@item.IdElecciones" asp-action="Delete" class="btn btn-danger">eliminar</a>
+                        </td>
+
+                    </tr>
+                }
+        </tbody>
+    </table>
+</section>

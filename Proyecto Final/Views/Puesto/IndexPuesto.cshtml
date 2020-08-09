@@ -33,7 +33,7 @@
                     <td>@item.DescripcionPuesto</td>
                     <td>@item.Estado</td>
                     <td>
-                        <a asp-area="" asp-controller="Puesto" asp-action="Editar" class="btn btn-warning">editar</a>
+                        <a asp-area="" asp-controller="Puesto" asp-action="Editar" asp-route-id="@item.IdPuesto" class="btn btn-warning">editar</a>
                         <a asp-area="" asp-controller="Puesto" asp-action="Delete" asp-route-id="@item.IdPuesto" class="btn btn-danger">eliminar</a>
                     </td>
 

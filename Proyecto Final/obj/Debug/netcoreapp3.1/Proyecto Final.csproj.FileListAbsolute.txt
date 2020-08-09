@@ -332,3 +332,9 @@ C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\
 C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\netcoreapp3.1\Proyecto Final.genruntimeconfig.cache
 C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\netcoreapp3.1\Razor\Views\Ciudadano\Editar.cshtml.g.cs
 C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AdminLayout.cshtml.g.cs
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\bin\Debug\netcoreapp3.1\DTOS.dll
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\bin\Debug\netcoreapp3.1\DTOS.pdb
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\netcoreapp3.1\Razor\Views\Partido\Editar.cshtml.g.cs
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\netcoreapp3.1\Razor\Views\Candidato\Editar.cshtml.g.cs
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\netcoreapp3.1\Razor\Views\Puesto\Editar.cshtml.g.cs
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Proyecto Final\obj\Debug\netcoreapp3.1\Razor\Views\Elecciones\Index.cshtml.g.cs

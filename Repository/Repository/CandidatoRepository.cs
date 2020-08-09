@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Database.Models;
+using DTOS;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -49,10 +50,44 @@ namespace Repository.Repository
         public async Task<bool> Addcandidato(CadidatoViewModel cadidatoViewModel,string foto)
         {
 
-            var map = _mapper.Map<Cadidato>(cadidatoViewModel);
-            map.fotoCandidato = foto;
+            var dto = _mapper.Map<CandidatoDTO>(cadidatoViewModel);
+            dto.fotoCandidato = foto;
+            var map = _mapper.Map<Cadidato>(dto);
             await Add(map);
             return true;
+        }
+
+        public CadidatoViewModel Editar(int id)
+        {
+            var can = GetById(id);
+            var viewModel = new CadidatoViewModel
+            {
+                IdCandidato = can.Result.IdCandidato,
+                NombreCandidato = can.Result.NombreCandidato,
+                Apellido = can.Result.Apellido,
+                PartidoCandidato = can.Result.PartidoCandidato,
+                PuestoCandidato = can.Result.PuestoCandidato,
+                Estado = can.Result.Estado
+
+            };
+            return viewModel;
+        }
+
+        public async Task<bool> Edit(CadidatoViewModel cadidatoViewModel, string foto)
+        {
+
+            var dto = _mapper.Map<CandidatoDTO>(cadidatoViewModel);
+            dto.fotoCandidato = foto;
+            var map = _mapper.Map<Cadidato>(dto);
+            if(await Update(map) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }

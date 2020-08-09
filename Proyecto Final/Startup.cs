@@ -36,6 +36,7 @@ namespace Proyecto_Final
             services.AddScoped<PartidoRepository>();
             services.AddScoped<CiudadanoRepository>();
             services.AddScoped<PuestoRepository>();
+            services.AddScoped<EleccionesRepository>();
             services.AddAutoMapper(typeof(AutoMapperConfiguration).GetTypeInfo().Assembly);
 
         }

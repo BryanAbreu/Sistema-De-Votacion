@@ -17,14 +17,14 @@ namespace Proyecto_Final.Controllers
     {
         private readonly proyectoFinalContext _context;
         private readonly PartidoRepository _partidoRepository;
-        private readonly IWebHostEnvironment hostEnvironment;
+        private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IMapper _mapper;
         public PartidoController(PartidoRepository partidoRepository, proyectoFinalContext context,IWebHostEnvironment hostEnvironment, IMapper mapper)
         {
             _partidoRepository = partidoRepository;
             _context = context;
-            this.hostEnvironment = hostEnvironment;
-            this._mapper = mapper;
+            _hostEnvironment = hostEnvironment;
+            _mapper = mapper;
         }
         // GET: Partido
         public ActionResult IndexPartido()
@@ -57,7 +57,7 @@ namespace Proyecto_Final.Controllers
                     string uniqueName = null;
                     if (partidoViewModel.fotoPartido != null)
                     {
-                        var folderPath = Path.Combine(hostEnvironment.WebRootPath, "images/partido");
+                        var folderPath = Path.Combine(_hostEnvironment.WebRootPath, "images/partido");
                         uniqueName = Guid.NewGuid().ToString() + "_" + partidoViewModel.fotoPartido.FileName;
                         var filePath = Path.Combine(folderPath, uniqueName);
                         if (filePath != null)
@@ -80,19 +80,39 @@ namespace Proyecto_Final.Controllers
         }
 
         // GET: Partido/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Editar(int id)
         {
-            return View();
+            return View(_partidoRepository.Editar(id));
         }
 
         // POST: Partido/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Editar(PartidoViewModel viewModel)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    string uniqueName = null;
+                    if (viewModel.fotoPartido != null)
+                    {
+                        var folderPath = Path.Combine(_hostEnvironment.WebRootPath, "images/partido");
+                        uniqueName = Guid.NewGuid().ToString() + "_" + viewModel.fotoPartido.FileName;
+                        var filePath = Path.Combine(folderPath, uniqueName);
+                        if (filePath != null)
+                        {
+                            var stream = new FileStream(filePath, mode: FileMode.Create);
+                            viewModel.fotoPartido.CopyTo(stream);
+                            stream.Flush();
+                            stream.Close();
+                        }
+                    }
+                    if (await _partidoRepository.Edit(viewModel, uniqueName))
+                    {
+                        return RedirectToAction(nameof(IndexPartido));
+                    }
+                }
 
                 return RedirectToAction(nameof(IndexPartido));
             }
@@ -103,28 +123,21 @@ namespace Proyecto_Final.Controllers
         }
 
         // GET: Partido/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(string foto,int id)
         {
-            await _partidoRepository.Delete(id);
+            if (await _partidoRepository.Delete(id) !=null) {
+                var folderPath = Path.Combine(_hostEnvironment.WebRootPath, "images/partido");
+                var filePathDelete = Path.Combine(folderPath, foto);
+
+                var fileInfo = new FileInfo(filePathDelete);
+                fileInfo.Delete();
+                return RedirectToAction(nameof(IndexPartido));
+
+            }
             return RedirectToAction(nameof(IndexPartido));
           
         }
 
-        // POST: Partido/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(IndexPartido));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      
     }
 }

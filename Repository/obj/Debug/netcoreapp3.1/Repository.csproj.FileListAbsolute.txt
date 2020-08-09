@@ -26,3 +26,5 @@ C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Repository\obj\Debug\netc
 C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CopyComplete
 C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Repository\obj\Debug\netcoreapp3.1\Repository.dll
 C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Repository\obj\Debug\netcoreapp3.1\Repository.pdb
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Repository\bin\Debug\netcoreapp3.1\DTOS.dll
+C:\Users\kanedaboi_\Desktop\ITLA\Prog 3\Proyecto Final\Repository\bin\Debug\netcoreapp3.1\DTOS.pdb

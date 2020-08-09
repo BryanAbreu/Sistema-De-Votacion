@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Database.Models;
+using DTOS;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Repository.RepositoryBase;
@@ -14,11 +16,12 @@ namespace Repository.Repository
     public class PuestoRepository : RepositoryBase<PuestoElectivo, proyectoFinalContext>
     {
         private new readonly proyectoFinalContext _context;
-        
+        private readonly IMapper _mapper;
        
-        public PuestoRepository(proyectoFinalContext context) : base(context)
+        public PuestoRepository(proyectoFinalContext context,IMapper mapper) : base(context)
         {
             _context = context;
+            _mapper = mapper;
         }
         public List<PuestoViewModel> GetPuestos()
         {
@@ -42,14 +45,37 @@ namespace Repository.Repository
         }
         public async Task<PuestoElectivo> AddPuesto(PuestoViewModel puestoViewModel)
         {
-            var puesto = new PuestoElectivo
+            var dto = _mapper.Map<PuestoElectivoDTO>(puestoViewModel);
+            var puesto = _mapper.Map<PuestoElectivo>(dto);
+            return await Add(puesto);
+        }
+
+        public PuestoViewModel Edit(int id)
+        {
+            var puesto = GetById(id);
+            var viewModel = new PuestoViewModel
             {
-                NombrePuesto = puestoViewModel.NombrePuesto,
-                DescripcionPuesto = puestoViewModel.DescripcionPuesto,
-                Estado = puestoViewModel.Estado
+                IdPuesto = puesto.Result.IdPuesto,
+                NombrePuesto = puesto.Result.NombrePuesto,
+                DescripcionPuesto = puesto.Result.DescripcionPuesto,
+                Estado = puesto.Result.Estado
             };
-          
-            return   await Add(puesto);  ; 
+            return viewModel;
+        }
+
+        public async Task<bool> Editar(PuestoViewModel viewModel)
+        {
+            var dto = _mapper.Map<PuestoElectivoDTO>(viewModel);
+            var puesto = _mapper.Map<PuestoElectivo>(dto);
+            if(await Update(puesto) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

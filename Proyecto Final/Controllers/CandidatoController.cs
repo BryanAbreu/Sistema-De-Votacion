@@ -82,20 +82,41 @@ namespace Proyecto_Final.Controllers
         }
 
         // GET: Candidato/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Editar(int id)
         {
-            return View();
+            return View(_candidatoRepository.Editar(id));
         }
 
         // POST: Candidato/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Editar(CadidatoViewModel viewModel)
         {
             try
             {
-                // TODO: Add update logic here
+                
+                    string uniqueName = null;
+                    if (viewModel.fotoCandidato != null)
+                    {
+                        var folderPath = Path.Combine(_hostingEnvironment.WebRootPath, "images/candidatos");
+                        uniqueName = Guid.NewGuid().ToString() + "_" + viewModel.fotoCandidato.FileName;
+                        var filePath = Path.Combine(folderPath, uniqueName);
 
+                        if (filePath != null)
+                        {
+                            var stream = new FileStream(filePath, mode: FileMode.Create);
+                            viewModel.fotoCandidato.CopyTo(stream);
+                            stream.Flush();
+                            stream.Close();
+                        }
+                        
+                    
+                    
+                }
+                if(await _candidatoRepository.Edit(viewModel, uniqueName))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -105,9 +126,17 @@ namespace Proyecto_Final.Controllers
         }
 
         // GET: Candidato/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(string foto,int id)
         {
-            await _candidatoRepository.Delete(id);
+            if(await _candidatoRepository.Delete(id) != null)
+            {
+                var folderPath = Path.Combine(_hostingEnvironment.WebRootPath, "images/partido");
+                var filePathDelete = Path.Combine(folderPath, foto);
+
+                var fileInfo = new FileInfo(filePathDelete);
+                fileInfo.Delete();
+            }
+
             return RedirectToAction(nameof(Index));
             
         }

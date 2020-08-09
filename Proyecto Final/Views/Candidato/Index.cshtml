@@ -31,8 +31,8 @@
     </ul>
     <div class="card-footer">
 
-        <a asp-area="" asp-controller="Candidato" asp-action="Editar" class="btn btn-warning">editar</a>
-        <a asp-action="Delete" asp-route-cedula="@item.IdCandidato" class="btn btn-danger">eliminar</a>
+        <a asp-area="" asp-controller="Candidato" asp-route-id="@item.IdCandidato" asp-action="Editar" class="btn btn-warning">Editar</a>
+        <a asp-action="Delete" asp-route-foto="@item.fotoCandidato" asp-route-cedula="@item.IdCandidato" class="btn btn-danger">Eliminar</a>
 
     </div>
 </div>
