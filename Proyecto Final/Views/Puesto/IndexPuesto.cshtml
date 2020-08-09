@@ -1,0 +1,45 @@
+﻿@using Database.Models
+@using ViewModels.Viewmodels
+@using Microsoft.AspNetCore.Http
+
+@model IEnumerable<ViewModels.Viewmodels.PuestoViewModel>
+@{
+    ViewData["Title"] = "IndexPuesto";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+   
+
+<section class="container my-3">
+    <h1>Puestos</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Puesto</th>
+                <th>descripcion</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.IdPuesto</td>
+                    <td>@item.NombrePuesto</td>
+                    <td>@item.DescripcionPuesto</td>
+                    <td>@item.Estado</td>
+                    <td>
+                        <a asp-area="" asp-controller="Puesto" asp-action="Editar" class="btn btn-warning">editar</a>
+                        <a asp-area="" asp-controller="Puesto" asp-action="Delete" asp-route-id="@item.IdPuesto" class="btn btn-danger">eliminar</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+

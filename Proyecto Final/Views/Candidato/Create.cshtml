@@ -1,0 +1,40 @@
+﻿@model ViewModels.Viewmodels.CadidatoViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Crear Candidato</h1>
+<form asp-controller="Candidato" asp-action="Create" enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <label asp-for="NombreCandidato">Nombre</label>
+        <input asp-for="NombreCandidato" type="text" class="form-control" id="Nombre">
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Apellido">Apellido</label>
+        <input asp-for="Apellido" type="text" class="form-control" id="Apellido">
+    </div>
+    <div class="form-group">
+        <label asp-for="PartidoCandidato">Partido</label>
+        <input asp-for="PartidoCandidato" type="text" class="form-control" id="Partido">
+    </div>
+    <div class="form-group">
+        <label asp-for="PuestoCandidato">Puesto</label>
+        <input asp-for="PuestoCandidato" type="text" class="form-control" id="Puesto">
+    </div>
+    <div class="form-group">
+        <label asp-for="fotoCandidato">Foto</label>
+        <input asp-for="fotoCandidato" type="file" class="form-control" id="foto">
+    </div>
+    <div class="form-group">
+        <label asp-for="Estado" class="col-form-label">Estado</label>
+        <select class="custom-select" asp-for="Estado">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+

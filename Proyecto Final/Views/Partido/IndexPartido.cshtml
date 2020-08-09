@@ -1,0 +1,35 @@
+﻿@using Database.Models
+@using ViewModels.Viewmodels
+@using Microsoft.AspNetCore.Http
+
+@model IEnumerable<ViewModels.Viewmodels.PartidoViewModel>
+@{
+    ViewData["Title"] = "IndexPartido";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Partidos</h1>
+@foreach (var item in Model)
+{
+<div class="card" style="width: 18rem;">
+
+    @{ var photoPath = "~/images/partido/" + (!string.IsNullOrEmpty(item.LogoPartido) ? item.LogoPartido : "");}
+    @if (!string.IsNullOrEmpty(item.LogoPartido))
+    {
+        <img src="@photoPath" asp-append-version="true" class="card-img-top" alt="...">
+    }
+    <ul class="card-body">
+        <li>@item.Id</li>
+        <li>@item.NombrePartido</li>
+        <li>@item.DescripcionPartido</li>
+        <li>@item.Estado</li>
+
+    </ul>
+    <div class="card-footer">
+
+        <a asp-area="" asp-controller="Partido" asp-action="Editar" class="btn btn-warning">editar</a>
+        <a asp-area="" asp-controller="Partido" asp-route-id="@item.Id" asp-action="Delete" class="btn btn-danger">eliminar</a>
+
+    </div>
+</div>
+}

@@ -1,0 +1,45 @@
+﻿@using Database.Models
+@using ViewModels.Viewmodels
+@using Microsoft.AspNetCore.Http
+
+@model IEnumerable<ViewModels.Viewmodels.CiudadanoViewModel>
+@{
+    ViewData["Title"] = "IndexCiudadano";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+   
+<section class="container my-3">
+    <h1>Ciudadanos</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Opcion</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.Cedula</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Apellido</td>
+                    <td>@item.Email</td>
+                    <td>@item.Estado</td>
+                    <td>
+                        <a asp-area="" asp-controller="Ciudadano" asp-action="Editar" asp-route-cedula="@item.Cedula" class="btn btn-warning">editar</a>
+                        <a asp-area="" asp-controller="Ciudadano" asp-route-cedula="@item.Cedula" asp-action="Delete" class="btn btn-danger">eliminar</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

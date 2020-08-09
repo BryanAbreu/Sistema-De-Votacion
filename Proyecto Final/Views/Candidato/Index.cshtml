@@ -1,0 +1,40 @@
+﻿@using Database.Models
+@using ViewModels.Viewmodels
+@using Microsoft.AspNetCore.Http
+
+@model IEnumerable<ViewModels.Viewmodels.CadidatoViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+   
+<h1>Candidatos</h1>
+
+@foreach (var item in Model)
+{
+<div class="card" style="width: 18rem;">
+
+
+    @if (item.foto != null)
+    {
+        <img src="~/images/candidatos/@item.foto" asp-append-version="true" class="card-img-top" alt="...">
+    }
+    else
+    {
+        <p></p>
+    }
+
+    <ul class="card-body">
+        <li>@item.NombreCandidato @item.Apellido</li>
+        <li>@item.PartidoCandidato</li>
+        <li>@item.PuestoCandidato</li>
+    </ul>
+    <div class="card-footer">
+
+        <a asp-area="" asp-controller="Candidato" asp-action="Editar" class="btn btn-warning">editar</a>
+        <a asp-action="Delete" asp-route-cedula="@item.IdCandidato" class="btn btn-danger">eliminar</a>
+
+    </div>
+</div>
+}
+

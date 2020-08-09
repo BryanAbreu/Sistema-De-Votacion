@@ -1,0 +1,34 @@
+﻿@model ViewModels.Viewmodels.PartidoViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h1>Crear Puestos</h1>
+<form asp-controller="Partido" asp-action="Create" enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <label asp-for="NombrePartido">Nombre del partido</label>
+        <input asp-for="NombrePartido" type="text" class="form-control" id="Nombre">
+
+    </div>
+    <div class="form-group">
+        <label asp-for="DescripcionPartido">descripcion del partido</label>
+        <input asp-for="DescripcionPartido" type="text" class="form-control" id="Apellido">
+    </div>
+    <div class="form-group">
+        <label asp-for="fotoPartido"></label>
+        <input asp-for="fotoPartido" type="file" class="form-control" />
+        <span asp-validation-for="fotoPartido" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Estado" class="col-form-label">Estado</label>
+        <select class="custom-select" asp-for="Estado">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
